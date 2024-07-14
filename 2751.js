@@ -1,3 +1,9 @@
+/**
+ * @param {number[]} positions
+ * @param {number[]} healths
+ * @param {string} directions
+ * @return {number[]}
+ */
 var survivedRobotsHealths = function (positions, healths, directions) {
   const sortPositons = [];
   const sortDirections = [];
@@ -26,7 +32,6 @@ var survivedRobotsHealths = function (positions, healths, directions) {
           ans.pop();
           break;
         } else if (healthOfLeft > ans[ans.length - 1][1]) {
-          console.log(stack);
           stack.pop();
           ans.pop();
           healthOfLeft--;
@@ -48,10 +53,3 @@ var survivedRobotsHealths = function (positions, healths, directions) {
   ans.sort((a, b) => a[0] - b[0]);
   return [...ans].map((x) => x[1]);
 };
-console.log(
-  survivedRobotsHealths(
-    [33, 60, 79, 34, 26],
-    [927, 428, 859, 322, 245],
-    "LRLRR"
-  )
-);
