@@ -53,3 +53,10 @@ var survivedRobotsHealths = function (positions, healths, directions) {
   ans.sort((a, b) => a[0] - b[0]);
   return [...ans].map((x) => x[1]);
 };
+console.log(
+  survivedRobotsHealths(
+    [33, 60, 79, 34, 26],
+    [927, 428, 859, 322, 245],
+    "LRLRR"
+  )
+);
