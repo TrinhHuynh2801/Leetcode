@@ -4,26 +4,24 @@
  * @return {number[]}
  */
 var decrypt = function (code, k) {
-  if (k == 0) return new Array(code.length).fill(0);
-  const ans = [];
-  if (k > 0)
-    for (let i = 0; i < code.length; i++) {
-      let sum = 0;
-      for (let j = 1; j <= k; j++) {
-        sum += code[(i + j) % code.length];
-      }
-      ans.push(sum);
-    }
-  else if (k < 0)
-    for (let i = 0; i < code.length; i++) {
-      let sum = 0;
-      for (let j = k; j < 0; j++) {
-        console.log(i + j);
-        console.log(code[i + j >= 0 ? i + j : i + j + code.length]);
-        sum += code[i + j >= 0 ? i + j : i + j + code.length];
-      }
-      ans.push(sum);
-    }
+  const n = code.length;
+  const ans = new Array(code.length).fill(0);
+  let start,
+    end,
+    sum = 0;
+  if (k == 0) return ans;
+  if (k > 0) {
+    start = 1;
+    end = k;
+  } else {
+    start = n + k;
+    end = n - 1;
+  }
+  for (let i = start; i <= end; i++) sum += code[i];
+  for (let i = 0; i < n; i++) {
+    ans[i] = sum;
+    sum = sum - code[start++ % n] + code[++end % n];
+  }
   return ans;
 };
 
