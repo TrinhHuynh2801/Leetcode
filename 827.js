@@ -4,10 +4,9 @@
  */
 var largestIsland = function (grid) {
   const mp = new Map();
-  mp.set(0, 0);
   const row = grid.length,
     col = grid[0].length;
-  let label = 2;
+  let islandId = 2;
   let maxArea = 0;
   const findArea = (i, j) => {
     if (
@@ -16,10 +15,10 @@ var largestIsland = function (grid) {
       j < 0 ||
       j >= col ||
       grid[i][j] == 0 ||
-      grid[i][j] == label
+      grid[i][j] == islandId
     )
       return 0;
-    grid[i][j] = label;
+    grid[i][j] = islandId;
     return (
       1 +
       findArea(i + 1, j) +
@@ -32,11 +31,13 @@ var largestIsland = function (grid) {
     for (let j = 0; j < col; j++) {
       if (grid[i][j] === 1) {
         const area = findArea(i, j);
-        mp.set(label, area);
-        label++;
+        mp.set(islandId, area);
+        islandId++;
         maxArea = Math.max(maxArea, area);
       }
     }
+
+  mp.set(0, 0);
   for (let i = 0; i < row; i++)
     for (let j = 0; j < col; j++) {
       if (grid[i][j] == 0) {
