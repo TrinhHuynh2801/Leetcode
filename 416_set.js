@@ -3,20 +3,17 @@
  * @return {boolean}
  */
 var canPartition = function(nums) {
-    let total = nums.reduce((a, b) => a + b, 0);
-    if (total % 2 !== 0) return false;
-    
-    let target = total / 2;
-    possible = new Set([0]);
-    
-    for (let num of nums) {
-        let newPossible = new Set(possible);
-        for (let s of possible) {
-            if (s + num === target) return true;
-            newPossible.add(s + num);
+    const sum = nums.reduce((a,b) => a + b, 0)
+    if (sum % 2 != 0) return false
+    const target = sum/2
+    let sumSet = new Set([0])
+    for (const num of nums) { 
+        const newSumSet = new Set(sumSet)
+        for (const sum of sumSet) {
+            if (sum + num == target) return true
+            newSumSet.add(sum+num)
         }
-        possible = newPossible;
+        sumSet = newSumSet
     }
-
-    return possible.has(target);
+    return sumSet.has(target)
 };
